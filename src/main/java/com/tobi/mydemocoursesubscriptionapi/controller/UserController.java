@@ -1,6 +1,7 @@
 package com.tobi.mydemocoursesubscriptionapi.controller;
 
 import com.tobi.mydemocoursesubscriptionapi.cervice.UserService;
+import com.tobi.mydemocoursesubscriptionapi.dto.UpdateUserStatusRequestDto;
 import com.tobi.mydemocoursesubscriptionapi.model.User;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -31,6 +32,12 @@ public class UserController {
     @PostMapping
     public User createUser(@RequestBody User user) {
         return userService.createUser(user);
+    }
+
+    @PatchMapping("/{id}/status")
+    public User updateUserStatus(@PathVariable Long id,
+                                 @RequestBody UpdateUserStatusRequestDto requestDto) {
+        return userService.updateUserStatus(id, requestDto.getStatus());
     }
 
     @DeleteMapping("/{id}")
