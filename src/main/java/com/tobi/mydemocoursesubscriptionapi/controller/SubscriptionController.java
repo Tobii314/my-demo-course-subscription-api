@@ -1,7 +1,7 @@
 package com.tobi.mydemocoursesubscriptionapi.controller;
 
 import com.tobi.mydemocoursesubscriptionapi.cervice.SubscriptionService;
-import com.tobi.mydemocoursesubscriptionapi.dto.SubscriptionRequestDto;
+import com.tobi.mydemocoursesubscriptionapi.dto.SubscriptionAdditionRequestDto;
 import com.tobi.mydemocoursesubscriptionapi.model.Subscription;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -32,7 +32,7 @@ public class SubscriptionController {
 
     @PostMapping
     public ResponseEntity<Subscription> subscribeUserToCourse(
-            @RequestBody SubscriptionRequestDto subscriptionRequestDto) {
+            @RequestBody SubscriptionAdditionRequestDto subscriptionRequestDto) {
         Subscription createdSubscription = subscriptionService.subscribeUserToCourse(
                 subscriptionRequestDto.getUserId(), subscriptionRequestDto.getCourseId());
         return ResponseEntity.status(HttpStatus.CREATED).body(createdSubscription);

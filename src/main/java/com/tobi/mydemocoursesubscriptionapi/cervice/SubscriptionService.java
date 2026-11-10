@@ -1,6 +1,8 @@
 package com.tobi.mydemocoursesubscriptionapi.cervice;
 
+import com.tobi.mydemocoursesubscriptionapi.exception.CourseNotFoundException;
 import com.tobi.mydemocoursesubscriptionapi.exception.SubscriptionLimitException;
+import com.tobi.mydemocoursesubscriptionapi.exception.UserNotFoundException;
 import com.tobi.mydemocoursesubscriptionapi.limitStrategy.SubscriptionLimitStrategy;
 import com.tobi.mydemocoursesubscriptionapi.model.Course;
 import com.tobi.mydemocoursesubscriptionapi.model.Subscription;
@@ -40,9 +42,9 @@ public class SubscriptionService {
 
     public Subscription subscribeUserToCourse(Long userId, Long courseId) {
         User user = userRepository.findById(userId)
-                .orElseThrow(()-> new RuntimeException("User not found with id " + userId));
+                .orElseThrow(()-> new UserNotFoundException("User not found with id " + userId));
         Course course = courseRepository.findById(courseId)
-                .orElseThrow(()-> new RuntimeException("Course not found with id " + courseId));
+                .orElseThrow(()-> new CourseNotFoundException("Course not found with id " + courseId));
 
         SubscriptionLimitStrategy strategy = this.strategyMap.get(user.getUserStatus());
         int limit = strategy.getLimit();

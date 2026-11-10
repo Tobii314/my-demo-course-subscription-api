@@ -5,7 +5,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class SubscriptionRequestDto {
+public class SubscriptionAdditionRequestDto {
     private Long userId;
     private Long courseId;
 }
